@@ -18,10 +18,10 @@ Here is an example implementation of binary search in Elixir, as defined in the 
 
 ```elixir
 iex> BinarySearch.search([1, 2, 3, 4, 5], 3)
-2
+{:ok, integer}
 
 iex> BinarySearch.search([1, 2, 3, 4, 5], 6)
-nil
+:not_found
 ```
 
 ### Time Complexity
