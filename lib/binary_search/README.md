@@ -22,10 +22,8 @@ iex> BinarySearch.search([1, 2, 3, 4, 5], 3)
 
 iex> BinarySearch.search([1, 2, 3, 4, 5], 6)
 nil
+```
 
 ### Time Complexity
-Binary search has a time complexity of O(log n). This is because the search space is halved with each step, leading to a logarithmic growth in the number of comparisons needed to find the target element.
 
-For example, for a list of size 16, binary search would take at most 4 comparisons (log₂16 = 4) to find the target element.
-
-Understanding time complexity helps in choosing the most efficient algorithm for a given problem, especially when dealing with large datasets. 
+The time complexity of binary search is O(log n), where n is the number of elements in the sorted list.
