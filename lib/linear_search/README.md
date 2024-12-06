@@ -1,29 +1,49 @@
-## Linear Search
+# Linear Search Module
 
-Linear search is a simple search algorithm that checks every element in a list sequentially until the desired element is found or the list ends. It is one of the most basic and straightforward search algorithms.
+This directory contains the `LinearSearch` module, which provides functionality to perform a linear search on a list.
 
-### How Linear Search Works
+## Module
 
-1. Start from the first element of the list.
-2. Compare the current element with the target element.
-3. If the current element matches the target, return the index of the current element.
-4. If the current element does not match the target, move to the next element and repeat step 2.
-5. If the end of the list is reached without finding the target, return `nil` indicating the target is not in the list.
+### LinearSearch
 
-### Example
+A module for performing a linear search on a list.
 
-Here is an example of how to use the linear search function with a list:
+#### Purpose
+
+The `LinearSearch` module provides a function to search for an item in a list and return its position if found.
+
+#### Usage
+
+To use the `LinearSearch` module, you can call the `search/2` function with a list and the item you want to search for. Here are some examples:
 
 ```elixir
-iex> LinearSearch.search([1, 3, 5, 7, 9], 3)
-{:ok, integer}
+iex> LinearSearch.search([1, 2, 3, 4], 3)
+{:ok, 2}
 
-iex> LinearSearch.search([1, 3, 5, 7, 9], 6)
+iex> LinearSearch.search([1, 2, 3, 4], 5)
 :not_found
 ```
 
-In this example, the `search` function will look for the target value `5` in the list `[1, 3, 5, 7, 9]`. If the target is found, it will print the index of the target element; otherwise, it will print "Element not found".
+#### Time Complexity
 
-### Time Complexity
+- Best case: O(1)
+- Average case: O(n)
+- Worst case: O(n)
 
-The time complexity of the linear search algorithm is O(n), where n is the number of elements in the list. In the worst case, the algorithm will have to check all elements before finding the target or concluding that the target is not in the list.
+## Running Tests
+
+To run the tests for the `LinearSearch` module, use the following command:
+
+```sh
+mix test
+```
+
+This will execute all the test cases defined for the module in this directory.
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License.

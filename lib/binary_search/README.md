@@ -1,29 +1,49 @@
-# Data Structures and Algorithms
+# Binary Search Module
 
-## Binary Search
+This directory contains the `BinarySearch` module, which provides functionality to perform a binary search on a sorted list.
 
-Binary search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing in half the portion of the list that could contain the item, until you've narrowed down the possible locations to just one.
+## Module
 
-### How Binary Search Works
+### BinarySearch
 
-1. Start with the middle element of the sorted list.
-2. If the middle element is equal to the target value, the search is complete.
-3. If the target value is less than the middle element, repeat the search on the left half of the list.
-4. If the target value is greater than the middle element, repeat the search on the right half of the list.
-5. Continue this process until the target value is found or the subarray size becomes zero.
+A module to perform a binary search on a sorted list.
 
-### Example Code
+#### Purpose
 
-Here is an example implementation of binary search in Elixir, as defined in the `BinarySearch` module:
+The `BinarySearch` module provides a function to search for an item in a sorted list and return its position if found.
+
+#### Usage
+
+To use the `BinarySearch` module, you can call the `search/2` function with a sorted list and the item you want to search for. Here are some examples:
 
 ```elixir
 iex> BinarySearch.search([1, 2, 3, 4, 5], 3)
-{:ok, integer}
+{:ok, 2}
 
 iex> BinarySearch.search([1, 2, 3, 4, 5], 6)
 :not_found
 ```
 
-### Time Complexity
+#### Time Complexity
 
-The time complexity of binary search is O(log n), where n is the number of elements in the sorted list.
+- Best case: O(1)
+- Average case: O(log n)
+- Worst case: O(log n)
+
+## Running Tests
+
+To run the tests for the `BinarySearch` module, use the following command:
+
+```sh
+mix test
+```
+
+This will execute all the test cases defined for the module in this directory.
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License.
