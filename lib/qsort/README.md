@@ -15,10 +15,6 @@ QuickSort is a highly efficient, comparison-based sorting algorithm that works b
 # Sort a list of numbers
 iex> QuickSort.qsort([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
 [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
-
-# Sort a list of strings
-iex> QuickSort.qsort(["banana", "apple", "cherry"])
-["apple", "banana", "cherry"]
 ```
 
 ## Implementation Details
@@ -35,10 +31,10 @@ The time complexity of QuickSort varies depending on the pivot selection and the
 
 - Best Case: O(n log n)
   - Occurs when the pivot always divides the list into roughly equal halves
-  
+
 - Average Case: O(n log n)
   - Expected performance in practice with random data
-  
+
 - Worst Case: O(n²)
   - Occurs when the list is already sorted or reverse sorted
   - Can be mitigated with better pivot selection strategies
