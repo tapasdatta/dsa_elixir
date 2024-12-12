@@ -1,4 +1,9 @@
 defmodule MultiplicationTable do
+  @moduledoc """
+  A module for printing multiplication tables.
+  """
+
+  @spec print_table([integer]) :: :ok
   def print_table(list) do
     print_rows(list, list)
   end
