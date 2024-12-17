@@ -4,7 +4,7 @@ defmodule Factorial do
   """
 
   @doc """
-  Calculates the factorial of a given number.
+  Calculates the factorial of a given number by using Tail-recursive method.
 
   ## Examples
 
@@ -13,10 +13,15 @@ defmodule Factorial do
 
   """
   @spec fact(integer) :: integer
-  def fact(0), do: 1
-  def fact(1), do: 1
+  def fact(n) when n <= 1, do: 1
 
-  def fact(number) do
-    number * fact(number - 1)
+  def fact(n) do
+    do_fact(n, 1)
+  end
+
+  defp do_fact(1, acc), do: acc
+
+  defp do_fact(n, acc) do
+    do_fact(n - 1, acc * n)
   end
 end
