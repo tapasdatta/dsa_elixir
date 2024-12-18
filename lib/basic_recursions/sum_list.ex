@@ -20,7 +20,6 @@ defmodule SumList do
 
   def sum(list), do: do_sum(0, list)
 
-  @spec do_sum(number, [number]) :: number
   defp do_sum(current_sum, []), do: current_sum
 
   defp do_sum(current_sum, [head | tail]) do
