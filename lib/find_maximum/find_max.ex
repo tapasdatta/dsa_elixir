@@ -22,12 +22,10 @@ defmodule FindMax do
     find_max(list)
   end
 
-  @spec find_max([number]) :: {:ok, number}
   defp find_max([head | tail]) do
     find_max(tail, head)
   end
 
-  @spec find_max([number], number) :: {:ok, number}
   defp find_max([], max), do: {:ok, max}
 
   defp find_max([head | tail], max) when max < head do
