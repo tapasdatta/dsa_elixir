@@ -20,14 +20,10 @@ defmodule SelectionSort do
     [min | sort(rest)]
   end
 
-  @doc false
-  @spec find_min(list) :: {any, list}
   defp find_min([head | tail]) do
     find_min(tail, head, [])
   end
 
-  @doc false
-  @spec find_min(list, any, list) :: {any, list}
   defp find_min([], min, rest), do: {min, rest}
 
   defp find_min([head | tail], min, rest) when head < min do
