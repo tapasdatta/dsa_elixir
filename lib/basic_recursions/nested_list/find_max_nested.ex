@@ -1,4 +1,19 @@
 defmodule FindMaxNested do
+  @moduledoc """
+  A module to find the maximum number in a nested list.
+
+  ## Examples
+
+      iex> FindMaxNested.max([1, [2, 3], [4, [5, 6]], 7])
+      7
+
+      iex> FindMaxNested.max([[], [-1, -2], [-3, [-4, -5]], -6])
+      -1
+
+      iex> FindMaxNested.max([])
+      {:error, "Empty list"}
+  """
+
   def max([]), do: {:error, "Empty list"}
 
   def max(list) do
