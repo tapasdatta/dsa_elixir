@@ -1,0 +1,2 @@
+defmodule Tribonacci do
+end

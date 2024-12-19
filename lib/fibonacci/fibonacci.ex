@@ -11,6 +11,8 @@ defmodule Fibonacci do
       [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
   """
 
+  def sequence(n) when n <= 0, do: []
+
   def sequence(n) do
     do_sequence(n, [1, 0])
   end
