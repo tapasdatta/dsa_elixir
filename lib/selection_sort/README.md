@@ -1,9 +1,3 @@
-# Selection Sort Module
-
-This directory contains the `SelectionSort` module, which provides functionality to perform selection sort on a list.
-
-## Module
-
 ### SelectionSort
 
 A module for performing selection sort on a list.

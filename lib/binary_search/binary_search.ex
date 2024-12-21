@@ -27,7 +27,6 @@ defmodule BinarySearch do
     do_search(list, item, 0, length(list) - 1)
   end
 
-  @spec do_search(list(any), any, integer, integer) :: {:ok, integer} | :not_found
   defp do_search(_, _, start, stop) when start > stop, do: :not_found
 
   defp do_search(list, item, start, stop) do

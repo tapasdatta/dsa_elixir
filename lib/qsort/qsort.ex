@@ -24,19 +24,16 @@ defmodule QuickSort do
   end
 
   # Returns the final partitioned lists when input list is empty
-  @spec partition([], any(), [any()], [any()]) :: {[any()], [any()]}
   defp partition([], _pivot, left, right) do
     {left, right}
   end
 
   # Adds elements <= pivot to left partition
-  @spec partition([any()], any(), [any()], [any()]) :: {[any()], [any()]}
   defp partition([head | tail], pivot, left, right) when head <= pivot do
     partition(tail, pivot, [head | left], right)
   end
 
   # Adds elements > pivot to right partition
-  @spec partition([any()], any(), [any()], [any()]) :: {[any()], [any()]}
   defp partition([head | tail], pivot, left, right) do
     partition(tail, pivot, left, [head | right])
   end
