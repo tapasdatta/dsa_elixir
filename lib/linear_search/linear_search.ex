@@ -29,7 +29,6 @@ defmodule LinearSearch do
     do_search(list, item, 0)
   end
 
-  @spec do_search(list(any), any, non_neg_integer) :: {:ok, non_neg_integer} | :not_found
   defp do_search([], _item, _position), do: :not_found
 
   defp do_search([head | tail], item, position) do

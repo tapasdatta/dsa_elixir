@@ -4,10 +4,14 @@ A simple implementation of the QuickSort algorithm in Elixir. This module provid
 
 ## Overview
 
-QuickSort is a highly efficient, comparison-based sorting algorithm that works by:
-1. Selecting a pivot element from the list
-2. Partitioning other elements into two sub-lists based on whether they are less than or greater than the pivot
-3. Recursively sorting the sub-lists
+QuickSort is a highly efficient, comparison-based sorting algorithm. Here’s a step-by-step explanation of how it works:
+
+1. **Selecting a Pivot Element**: Choose an element from the list to be the pivot. In this implementation, the head of the list is used as the pivot.
+2. **Partitioning the List**: Divide the remaining elements into two sub-lists:
+   - Elements less than the pivot
+   - Elements greater than or equal to the pivot
+3. **Recursively Sorting Sub-lists**: Apply the same process to the sub-lists. Continue partitioning and sorting until the sub-lists are empty or contain a single element.
+4. **Combining Results**: Concatenate the sorted sub-lists and the pivot to form the final sorted list.
 
 ## Usage
 

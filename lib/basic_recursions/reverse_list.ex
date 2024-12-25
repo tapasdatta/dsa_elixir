@@ -13,7 +13,6 @@ defmodule ReverseList do
     do_reverse(list, [])
   end
 
-  @spec do_reverse(list, list) :: list
   defp do_reverse([], reverse_list), do: reverse_list
 
   defp do_reverse([head | tail], reverse_list) do
