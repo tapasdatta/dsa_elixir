@@ -1,6 +1,6 @@
 defmodule DepthFirstSearch do
   @moduledoc """
-  A module to perform Depth-First Search (BFS) on a graph.
+  A module to perform Depth-First Search (DFS) on a graph.
       tapas
       /     \
     alice     bob
