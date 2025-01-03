@@ -25,7 +25,6 @@ defmodule LucasNumber do
   def sequence(n), do: do_sequence(n, [1, 2])
 
   # Base case for recursion
-  @spec do_sequence(integer, list(integer)) :: list(integer)
   defp do_sequence(2, acc), do: Enum.reverse(acc)
 
   defp do_sequence(n, [a, b | _] = acc) do
