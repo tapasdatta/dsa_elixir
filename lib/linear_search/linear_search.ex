@@ -24,17 +24,14 @@ defmodule LinearSearch do
           iex> LinearSearch.search([1, 2, 3, 4], 5)
           :not_found
   """
-  @spec search(list(any), any) :: {:ok, non_neg_integer} | :not_found
-  def search(list, item) do
-    do_search(list, item, 0)
-  end
+
+  def search(list, item), do: do_search(list, item, 0)
 
   defp do_search([], _item, _position), do: :not_found
 
-  defp do_search([head | tail], item, position) do
-    cond do
-      head == item -> {:ok, position}
-      true -> do_search(tail, item, position + 1)
-    end
+  defp do_search([head | _tail], item, position) when head == item do
+    {:ok, position}
   end
+
+  defp do_search([_head | tail], item, position), do: do_search(tail, item, position + 1)
 end
