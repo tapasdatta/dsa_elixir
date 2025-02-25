@@ -22,7 +22,7 @@ defmodule SumNested do
   defp do_sum([], acc), do: acc
 
   defp do_sum([head | tail], acc) when is_list(head) do
-    do_sum(head ++ tail, acc)
+    do_sum(tail, do_sum(head, acc))
   end
 
   defp do_sum([head | tail], acc) when is_number(head) do

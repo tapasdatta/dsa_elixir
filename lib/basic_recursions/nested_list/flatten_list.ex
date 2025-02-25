@@ -17,9 +17,13 @@ defmodule Flatten do
       []
   """
 
-  def flatten([]), do: []
+  def flatten(list), do: do_flatten(list, []) |> Enum.reverse()
 
-  def flatten([head | tail]), do: flatten(head) ++ flatten(tail)
+  defp do_flatten([], acc), do: acc
 
-  def flatten(head), do: [head]
+  defp do_flatten([head | tail], acc) when is_list(head) do
+    do_flatten(tail, do_flatten(head, acc))
+  end
+
+  defp do_flatten([head | tail], acc), do: do_flatten(tail, [head | acc])
 end
