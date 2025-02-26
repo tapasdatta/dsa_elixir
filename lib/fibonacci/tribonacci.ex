@@ -12,11 +12,9 @@ defmodule Tribonacci do
 
   """
 
-  def sequence(n) do
-    do_sequence(n, [1, 1, 0])
-  end
+  def sequence(n), do: do_sequence(n, [1, 1, 0]) |> Enum.reverse()
 
-  defp do_sequence(3, acc), do: Enum.reverse(acc)
+  defp do_sequence(3, acc), do: acc
 
   defp do_sequence(n, [a, b, c | _] = acc) do
     do_sequence(n - 1, [a + b + c | acc])
