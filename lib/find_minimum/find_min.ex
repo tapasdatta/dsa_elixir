@@ -8,31 +8,19 @@ defmodule FindMin do
 
   ## Examples
 
-      iex> FindMin.find_min([3, 1, 4, 1, 5, 9])
-      {:ok, 1}
-
-      iex> FindMin.find_min([])
-      []
+      iex> FindMin.min([3, 1, 4, 1, 5, 9])
+      1
 
   """
-  @spec find_min(list(number())) :: {:ok, number()} | []
-  def find_min([]), do: []
+  def min(list), do: find_min(list, 0)
 
-  def find_min([head | tail]) do
-    {min} = find_min(tail, head)
-    {:ok, min}
+  defp find_min([], current_min), do: current_min
+
+  defp find_min([head | tail], 0), do: find_min(tail, head)
+
+  defp find_min([head | tail], current_min) when current_min < head do
+    find_min(tail, current_min)
   end
 
-  @doc false
-  defp find_min([], min), do: {min}
-
-  @doc false
-  defp find_min([head | tail], min) when head < min do
-    find_min(tail, head)
-  end
-
-  @doc false
-  defp find_min([_head | tail], min) do
-    find_min(tail, min)
-  end
+  defp find_min([head | tail], _current_min), do: find_min(tail, head)
 end

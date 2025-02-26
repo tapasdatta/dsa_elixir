@@ -9,30 +9,16 @@ defmodule FindMax do
   ## Examples
 
       iex> FindMax.max([1, 2, 3, 4, 5])
-      {:ok, 5}
-
-      iex> FindMax.max([])
-      []
-
+      5
   """
-  @spec max([number]) :: {:ok, number} | []
-  def max([]), do: []
 
-  def max(list) do
-    find_max(list)
+  def max(list), do: find_max(list, 0)
+
+  defp find_max([], current_max), do: current_max
+
+  defp find_max([head | tail], current_max) when current_max > head do
+    find_max(tail, current_max)
   end
 
-  defp find_max([head | tail]) do
-    find_max(tail, head)
-  end
-
-  defp find_max([], max), do: {:ok, max}
-
-  defp find_max([head | tail], max) when max < head do
-    find_max(tail, head)
-  end
-
-  defp find_max([_head | tail], max) do
-    find_max(tail, max)
-  end
+  defp find_max([head | tail], _current_max), do: find_max(tail, head)
 end
