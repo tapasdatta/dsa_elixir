@@ -12,12 +12,10 @@ defmodule Factorial do
       120
 
   """
-  @spec fact(integer) :: integer
+
   def fact(n) when n <= 1, do: 1
 
-  def fact(n) do
-    do_fact(n, 1)
-  end
+  def fact(n), do: do_fact(n, 1)
 
   defp do_fact(1, acc), do: acc
 
