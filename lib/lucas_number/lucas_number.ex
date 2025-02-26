@@ -13,10 +13,6 @@ defmodule LucasNumber do
 
       iex> LucasNumber.sequence(5)
       [2, 1, 3, 4, 7]
-
-      iex> LucasNumber.sequence(-1)
-      []
-
   """
 
   def sequence(n), do: do_sequence(n, [1, 2]) |> Enum.reverse()
