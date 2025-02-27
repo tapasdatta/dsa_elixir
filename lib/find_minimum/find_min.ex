@@ -12,15 +12,13 @@ defmodule FindMin do
       1
 
   """
-  def min(list), do: find_min(list, 0)
+  def min(list), do: find_min(list)
 
-  defp find_min([], current_min), do: current_min
+  defp find_min([x]), do: x
 
-  defp find_min([head | tail], 0), do: find_min(tail, head)
-
-  defp find_min([head | tail], current_min) when current_min < head do
-    find_min(tail, current_min)
+  defp find_min([x, y | tail]) when x < y do
+    find_min([x | tail])
   end
 
-  defp find_min([head | tail], _current_min), do: find_min(tail, head)
+  defp find_min([_x, y | tail]), do: find_min([y | tail])
 end

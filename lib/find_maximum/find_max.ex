@@ -12,13 +12,15 @@ defmodule FindMax do
       5
   """
 
-  def max(list), do: find_max(list, 0)
+  def max(list), do: find_max(list)
 
-  defp find_max([], current_max), do: current_max
+  defp find_max([x]), do: x
 
-  defp find_max([head | tail], current_max) when current_max > head do
-    find_max(tail, current_max)
+  defp find_max([x, y | tail]) when x > y do
+    find_max([x | tail])
   end
 
-  defp find_max([head | tail], _current_max), do: find_max(tail, head)
+  defp find_max([_x, y | tail]) do
+    find_max([y | tail])
+  end
 end
