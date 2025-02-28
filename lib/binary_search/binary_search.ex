@@ -19,24 +19,22 @@ defmodule BinarySearch do
           iex> BinarySearch.search([1, 2, 3, 4, 5], 3)
           {:ok, 2}
 
-          iex> BinarySearch.search([1, 2, 3, 4, 5], 6)
+          iex> BinarySearch.search([1, 2, 3, 4, 5], 2)
           :not_found
   """
-  @spec search(list(any), any) :: {:ok, integer} | :not_found
-  def search(list, item) do
-    do_search(list, item, 0, length(list) - 1)
-  end
 
-  defp do_search(_, _, start, stop) when start > stop, do: :not_found
+  def search(list, item) when is_list(list), do: do_search(list, item, 0)
 
-  defp do_search(list, item, start, stop) do
-    mid = div(start + stop, 2)
-    value = Enum.at(list, mid)
+  defp do_search([], _item, _index), do: :not_found
+
+  defp do_search(list, item, index) do
+    mid = div(length(list), 2)
+    {left, [value | right]} = Enum.split(list, mid)
 
     cond do
-      value == item -> {:ok, mid}
-      value > item -> do_search(list, item, start, mid - 1)
-      true -> do_search(list, item, mid + 1, stop)
+      value == item -> {:ok, index + mid}
+      value > item -> do_search(left, item, index)
+      true -> do_search(right, item, index + mid + 1)
     end
   end
 end
