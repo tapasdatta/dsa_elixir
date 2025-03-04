@@ -15,16 +15,12 @@ defmodule PadovanSequence do
   ## Examples
 
       iex> PadovanSequence.sequence(10)
-      [1, 1, 1, 2, 2, 3, 4, 5, 7, 9]
+      [1, 1, 1, 2, 2, 3, 4, 5, 7, 9, 12]
 
   """
-  @spec sequence(integer) :: list(integer)
-  # Handle invalid input
-  def sequence(n) when n < 0, do: []
 
   def sequence(n), do: do_sequence(n, [])
 
-  # Base case
   defp do_sequence(n, acc) when n < 0, do: acc
 
   defp do_sequence(n, acc) do

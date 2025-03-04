@@ -15,12 +15,11 @@ defmodule BinarySearch do
   - `:not_found` if the item is not found.
 
   ## Examples
+    iex> BinarySearch.search([1, 2, 3, 4, 5], 3)
+    {:ok, 2}
 
-          iex> BinarySearch.search([1, 2, 3, 4, 5], 3)
-          {:ok, 2}
-
-          iex> BinarySearch.search([1, 2, 3, 4, 5], 2)
-          :not_found
+    iex> BinarySearch.search([1, 2, 3, 4, 5], 2)
+    :not_found
   """
 
   def search(list, item) when is_list(list), do: do_search(list, item, 0)
