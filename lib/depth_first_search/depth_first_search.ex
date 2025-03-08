@@ -1,41 +1,55 @@
 defmodule DepthFirstSearch do
   @moduledoc """
-  A module to perform Depth-First Search (DFS) on a graph.
-      tapas
-      /     \
-    alice     bob
-    /   \      /  \
-  thom claire anuj peggy
-    |
-  jonny
+  A module to perform Depth-First Search (BFS) on a graph.
+
+  Example graph:
+          tapas
+        /   |   \
+    alice  bob   claire
+    |    /  \       /   \
+  peggy anuj peggy thom jonny
+
+  graph = %{
+    "tapas" => ["alice", "bob", "claire"],
+    "bob" => ["anuj", "peggy"],
+    "alice" => ["peggy"],
+    "claire" => ["thom", "jonny"],
+    "peggy" => [],
+    "thom" => [],
+    "jonny" => []
+  }
   """
 
-  # Example output: ["tapas", "alice", "thom", "johny", "claire", "bob", "anuj", "peggy"]
+  @doc """
+  Performs BFS on a graph starting from a given node.
 
-  def search() do
-    graph = [
-      {"tapas", "alice"},
-      {"tapas", "bob"},
-      {"alice", "thom"},
-      {"alice", "claire"},
-      {"bob", "anuj"},
-      {"bob", "peggy"},
-      {"thom", "johny"}
-    ]
+  ## Parameters
+  - graph: A map where keys are nodes and values are lists of neighbors.
+  - start: The starting node.
 
-    do_search(graph, ["tapas"], [])
+  ## Returns
+  - A list of nodes in BFS order.
+
+  ## Examples
+    iex> graph = %{"tapas" => ["alice", "bob", "claire"], "bob" => ["anuj", "peggy"], "alice" => ["peggy"], "claire" => ["thom", "jonny"], "anuj" => [], "peggy" => [], "thom" => [], "jonny" => []}
+    iex> DepthFirstSearch.search(graph, "tapas")
+    ["tapas", "claire", "jonny", "thom", "bob", "peggy", "anuj", "alice", "peggy"]
+  """
+
+  def search(graph, start) do
+    stack = :queue.from_list([start])
+    do_search(graph, stack, [])
   end
 
-  defp do_search(_graph, [], result), do: Enum.reverse(result)
+  defp do_search(graph, stack, result) do
+    case :queue.out(stack) do
+      {{:value, current}, new_stack} ->
+        neighbours = Map.get(graph, current, [])
+        new_stack = Enum.reduce(neighbours, new_stack, &:queue.in_r/2)
+        do_search(graph, new_stack, [current | result])
 
-  defp do_search(graph, [current | stack], result) do
-    neighbours = find_neighbours(graph, current)
-    do_search(graph, neighbours ++ stack, [current | result])
-  end
-
-  defp find_neighbours(graph, node) do
-    graph
-    |> Enum.filter(fn {from, _} -> from == node end)
-    |> Enum.map(fn {_, to} -> to end)
+      {:empty, _} ->
+        Enum.reverse(result)
+    end
   end
 end

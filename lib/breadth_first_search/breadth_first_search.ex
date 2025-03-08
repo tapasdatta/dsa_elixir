@@ -31,9 +31,9 @@ defmodule BreadthFirstSearch do
   - A list of nodes in BFS order.
 
   ## Examples
-      iex> graph = %{"tapas" => ["alice", "bob", "claire"], "bob" => ["anuj", "peggy"], "alice" => ["peggy"], "claire" => ["thom", "jonny"], "anuj" => [], "peggy" => [], "thom" => [], "jonny" => []}
-      iex> BreadthFirstSearch.search(graph, "tapas")
-      ["tapas", "alice", "bob", "claire", "peggy", "anuj", "thom", "jonny"]
+    iex> graph = %{"tapas" => ["alice", "bob", "claire"], "bob" => ["anuj", "peggy"], "alice" => ["peggy"], "claire" => ["thom", "jonny"], "anuj" => [], "peggy" => [], "thom" => [], "jonny" => []}
+    iex> BreadthFirstSearch.search(graph, "tapas")
+    ["tapas", "alice", "bob", "claire", "peggy", "anuj", "thom", "jonny"]
   """
   def search(graph, start) do
     queue = :queue.from_list([start])
