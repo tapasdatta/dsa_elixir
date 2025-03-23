@@ -1,6 +1,6 @@
 defmodule Dijkstra do
   @moduledoc """
-  A module to find the shortest paths using Dijkstra's Algorithm, like a treasure hunt!
+  A module to find the shortest paths using Dijkstra's Algorithm.
   """
 
   @doc """
@@ -11,69 +11,50 @@ defmodule Dijkstra do
   - start: The starting town.
 
   ## Returns
-  - A map of towns to their shortest times.
+  - A sorted list of {town, time} tuples.
 
   ## Examples
-      iex> graph = %{"start" => [{"apple", 4}, {"banana", 2}], "apple" => [{"gold", 3}, {"banana", 1}], "banana" => [{"apple", 1}, {"gold", 5}], "gold" => []}
+      iex> graph = %{
+      ...>   "start" => [{"apple", 4}, {"banana", 2}],
+      ...>   "apple" => [{"gold", 3}, {"banana", 1}],
+      ...>   "banana" => [{"apple", 1}, {"gold", 5}],
+      ...>   "gold" => []
+      ...> }
       iex> Dijkstra.search(graph, "start")
-      %{"start" => 0, "apple" => 3, "banana" => 2, "gold" => 6}
+      [{"start", 0}, {"banana", 2}, {"apple", 3}, {"gold", 6}]
   """
   def search(graph, start) do
-    # Step 1: Make our list of times (distances) and towns to visit
-    # Startville is 0 minutes
-    distances = Map.put(%{}, start, 0)
-    # Our "to explore" list starts with Startville
-    to_visit = :queue.from_list([start])
-    # Towns we’ve finished exploring
+    distances = %{start => 0}
+    # Priority queue: sorted by distance
+    to_visit = [{0, start}]
     visited = MapSet.new()
 
-    # Step 2: Start the adventure!
-    do_search(graph, to_visit, visited, distances)
+    distances
+    |> do_search(graph, to_visit, visited)
+    |> Enum.sort_by(fn {_, distance} -> distance end)
   end
 
-  defp do_search(graph, to_visit, visited, distances) do
-    case :queue.out(to_visit) do
-      # If there’s a town to visit
-      {{:value, current}, new_to_visit} ->
-        # Skip if we’ve already explored it
-        if MapSet.member?(visited, current) do
-          do_search(graph, new_to_visit, visited, distances)
-        else
-          # Get the time to this town (default to infinity if unknown)
-          current_distance = Map.get(distances, current, :infinity)
+  defp do_search(distances, _graph, [], _visited), do: distances
 
-          # Step 3: Check all paths from this town
-          neighbours = Map.get(graph, current, [])
+  defp do_search(distances, graph, [{current_distance, current_city} | rest_cities], visited) do
+    if MapSet.member?(visited, current_city) do
+      do_search(distances, graph, rest_cities, visited)
+    else
+      neighbors = Map.get(graph, current_city, [])
 
-          {new_distances, new_to_visit} =
-            Enum.reduce(neighbours, {distances, new_to_visit}, fn {neighbor, time},
-                                                                  {dists, queue} ->
-              # New time = time to current + path time
-              new_dist = current_distance + time
+      {new_distances, new_to_visit} =
+        Enum.reduce(neighbors, {distances, rest_cities}, fn {neighbor, time}, {dists, queue} ->
+          new_dist = current_distance + time
+          old_dist = Map.get(dists, neighbor, :infinity)
 
-              # If it’s faster than what we knew, update it!
-              old_dist = Map.get(dists, neighbor, :infinity)
+          if new_dist < old_dist do
+            {Map.put(dists, neighbor, new_dist), Enum.sort([{new_dist, neighbor} | queue])}
+          else
+            {dists, queue}
+          end
+        end)
 
-              if new_dist < old_dist do
-                {
-                  Map.put(dists, neighbor, new_dist),
-                  # Add neighbor to visit later
-                  :queue.in(neighbor, queue)
-                }
-              else
-                # No update needed
-                {dists, queue}
-              end
-            end)
-
-          # Mark this town explored
-          new_visited = MapSet.put(visited, current)
-          do_search(graph, new_to_visit, new_visited, new_distances)
-        end
-
-      # If no more towns to visit, we’re done!
-      {:empty, _} ->
-        distances
+      do_search(new_distances, graph, new_to_visit, MapSet.put(visited, current_city))
     end
   end
 end
