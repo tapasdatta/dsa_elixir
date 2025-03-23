@@ -1,2 +1,0 @@
-defmodule DijkstraNode do
-end

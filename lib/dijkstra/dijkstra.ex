@@ -13,14 +13,24 @@ defmodule Dijkstra do
   ## Returns
   - A sorted list of {town, time} tuples.
 
+    (Start)
+      /      \
+    4/        \2
+    /          \
+  (Apple)----1---->(Banana)
+    |            /
+    |3         /5
+    v         v
+      (Gold)
+
   ## Examples
       iex> graph = %{
-      ...>   "start" => [{"apple", 4}, {"banana", 2}],
-      ...>   "apple" => [{"gold", 3}, {"banana", 1}],
-      ...>   "banana" => [{"apple", 1}, {"gold", 5}],
-      ...>   "gold" => []
-      ...> }
-      iex> Dijkstra.search(graph, "start")
+        "start" => [{"apple", 4}, {"banana", 2}],
+        "apple" => [{"gold", 3}, {"banana", 1}],
+        "banana" => [{"apple", 1}, {"gold", 5}],
+        "gold" => []
+      }
+      Dijkstra.search(graph, "start")
       [{"start", 0}, {"banana", 2}, {"apple", 3}, {"gold", 6}]
   """
   def search(graph, start) do

@@ -2,6 +2,16 @@ defmodule Nodes do
   @doc """
     # Example usage
 
+    (Start)
+     /    \
+    6/      \2
+   /        \
+  (A) ----3--> (B)
+   \          /
+    \1      /5
+     \     /
+     (Finish)
+
     graph = %{
       "Start" => [{"A", 6}, {"B", 2}],
       "A" => [{"Finish", 1}],
