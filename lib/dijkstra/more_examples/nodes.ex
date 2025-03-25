@@ -19,7 +19,7 @@ defmodule Nodes do
       "Finish" => []
     }
 
-    Nodes.search(graph, "start")
+    Nodes.search(graph, "Start")
 
     # Output: [{"start", 0}, {"B", 2}, {"A", 5}, {"Finish", 6}]
   """
@@ -39,23 +39,22 @@ defmodule Nodes do
   defp do_search(nodes, graph, [{current_distance, current_node} | next_nodes], visited) do
     if MapSet.member?(visited, current_node) do
       do_search(nodes, graph, next_nodes, visited)
+    else
+      neighbours = Map.get(graph, current_node, [])
+
+      {new_nodes, new_next_visits} =
+        Enum.reduce(neighbours, {nodes, next_nodes}, fn {neighbour, time}, {nodes, next_nodes} ->
+          new_time = current_distance + time
+          old_time = Map.get(nodes, neighbour, :infinity)
+
+          if new_time < old_time do
+            {Map.put(nodes, neighbour, new_time), Enum.sort([{new_time, neighbour} | next_nodes])}
+          else
+            {nodes, next_nodes}
+          end
+        end)
+
+      do_search(new_nodes, graph, new_next_visits, MapSet.put(visited, current_node))
     end
-
-    neighbours = Map.get(graph, current_node, [])
-
-    {new_nodes, new_next_visits} =
-      Enum.reduce(neighbours, {nodes, next_nodes}, fn {neighbour, time}, {nodes, next_nodes} ->
-        new_time = current_distance + time
-
-        old_time = Map.get(nodes, neighbour, :infinity)
-
-        if new_time < old_time do
-          {Map.put(nodes, neighbour, new_time), [{new_time, neighbour} | next_nodes]}
-        else
-          {nodes, next_nodes}
-        end
-      end)
-
-    do_search(new_nodes, graph, new_next_visits, MapSet.put(visited, current_node))
   end
 end
